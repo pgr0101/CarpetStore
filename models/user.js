@@ -11,7 +11,7 @@ let userSchema = mongoose.Schema(
         },
 
         password : {
-            type : Srting,
+            type : String,
             required: true
         },
 
@@ -31,7 +31,7 @@ let userSchema = mongoose.Schema(
 
         transaction : [
             {
-                type : mognoose.Schema.Types.objectId
+                type : mongoose.Schema.Types.ObjectId
             }
         ]
 

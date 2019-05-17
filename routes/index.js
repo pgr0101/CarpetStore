@@ -3,7 +3,7 @@ var router = express.Router();
 var user = require('../models/user');
 var jwt = require('jsonwebtoken');
 
-router.post('/login' , function (req, res) {
+router.post('/signin' , function (req, res) {
   // TODO login a user jwt
   let answer = signinAnswer(req.username , req.password);
   if(asnwer){
@@ -21,8 +21,8 @@ router.post('/login' , function (req, res) {
       'token' : token
     });
   }else{
-    res.status(403).json({
-      'msg' : 'access denied'
+    res.status(406).json({
+      'msg' : 'wrong input.'
     });
   }
 });
@@ -43,8 +43,10 @@ router.post('/signup' , function (req, res) {
   });
 });
 
-router.get('/logout/:username' , function (req ,res) {
-  // TODO logout jwt ... req.params.username
+
+router.get('/' , function (req, res) {
+  // TODO : guest page , showing new carpets from the db
+  res.render('index');
 });
 
 module.exports = router;
