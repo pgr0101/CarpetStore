@@ -16,8 +16,10 @@
     "mongodb": "*",
     "bcryptjs": "*",
     "jsonwebtoken": "*",
-    "child_process": "*",
+    "python-shell": "*",
+    "child-process" : "*",
     "express-validator": "*",
-    "cors": "*"
+    "cors": "*",
+    "path": "*"
   }
 }
