@@ -19,11 +19,6 @@ let carpetSchema = mongoose.Schema(
             required : true
         } ,
 
-        count : {
-            type : Number ,
-            required : true
-        },
-
         rate : {
             type : Number ,
         }
@@ -34,7 +29,12 @@ let carpetSchema = mongoose.Schema(
 let Carpet = module.exports = mognoose.model('Carpet' , carpetSchema);
 
 module.exports.recommendCarpet = async function(cash) {
-    // TODO retuns a map of carpet price and count
+    // TODO : returns a map of count and carpet
+    // TODO : bag algorithm
+};
+
+exports.newCarpet = function(){
+  // TODO : making a new carpet and saving it
 };
 
 

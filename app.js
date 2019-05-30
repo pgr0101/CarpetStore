@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var cors = require('cors');
 
 mongoose.connect('mongodb://127.0.0.1:27017/CarpetStore');
 
@@ -14,7 +15,6 @@ let db = mongoose.connection.on('connect' , function () {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
-var jwebtRouter = require('./routes/jwttest');
 
 var app = express();
 
@@ -32,10 +32,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/jwt' , jwebtRouter);
 app.use('/users', usersRouter);
 app.use('/admin' , adminRouter);
 

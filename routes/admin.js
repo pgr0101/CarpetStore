@@ -8,14 +8,6 @@ let router = require('express').Router();
 
 
 
-router.get('/' , function (req, res) {
-    /**
-     * TODO : dashboard and setting up site
-     *  for example maps and ...
-     * */
-});
-
-
 router.post('/map' , function (req, res) {
    /**
     * TODO : adding crosses and
@@ -24,3 +16,13 @@ router.post('/map' , function (req, res) {
     *  shortest way
     * */
 });
+
+
+function floyd(matrix){
+    // TODO : sending json to python file for algorithm  
+    
+    // TODO : saving the router to database
+}
+
+
+module.exports = router; 

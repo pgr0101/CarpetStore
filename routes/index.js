@@ -1,35 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var user = require('../models/user');
+var User = require('../models/User');
 var jwt = require('jsonwebtoken');
 
-router.post('/signin' , function (req, res) {
-  // TODO login a user jwt
-  let answer = signinAnswer(req.username , req.password);
-  if(asnwer){
-    let token = jwt.sign(
-          {
-            username : req.username
-          },
-          'thispgr0101secret',
-          {
-            expires : '24h',
-          },
-        );
-    res.json({
-      'msg' : "logged in" ,
-      'token' : token
-    });
-  }else{
-    res.status(406).json({
-      'msg' : 'wrong input.'
-    });
-  }
-});
-
 router.post('/signup' , function (req, res) {
-  // TODO register an instance of user.model
-  registerUser(req.body.username , req.body.password,function(err , user){
+  let userDoc = new User({
+    username : req.body.username ,
+    password : req.body.password
+  });
+  User.register(userDoc,function(err , user){
     if(err){
       res.status(406).json({
         'msg' : "a problem happened",
@@ -43,9 +22,31 @@ router.post('/signup' , function (req, res) {
   });
 });
 
+router.post('/signin' , async function (req, res) {
+  let answer = await User.authenticate(req.body.username , req.body.password);
+  if(answer){
+    let token = jwt.sign(
+          {
+            username : req.body.username
+          },
+          'pgr0101secret',
+          {
+            expiresIn : '24h',
+          },
+        );
+    res.json({
+      'msg' : "logged in" ,
+      'token' : token
+    });
+  }else{
+    res.status(406).json({
+      'msg' : 'username or password is wrong.'
+    });
+  }
+});
 
 router.get('/' , function (req, res) {
-  // TODO : guest page , showing new carpets from the db
+  // TODO : guest page , showing all carpets
   res.render('index');
 });
 
