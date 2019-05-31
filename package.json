@@ -17,7 +17,7 @@
     "bcryptjs": "*",
     "jsonwebtoken": "*",
     "python-shell": "*",
-    "child-process" : "*",
+    "child-process": "*",
     "express-validator": "*",
     "cors": "*",
     "path": "*"

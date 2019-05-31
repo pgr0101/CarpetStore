@@ -1,6 +1,7 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
+var Map = require('../models/Map');
 
 /**
  * router middleware for jwt auth
@@ -30,7 +31,7 @@ router.use(function (req, res, next) {
 /* GET users listing. */
 router.get('/', function(req, res) {
   // TODO : profile handling
-  //  returning all the carpets he added
+  //  returning all the carpets s/he added
   res.json({
     msg : 'all the carpets'
   });
@@ -70,7 +71,7 @@ router.post('/findbyplan' , function (req, res) {
 });
 
 
-router.post('/bywithmoney', function (req, res) {
+router.get('/bywithmoney/:money', function (req, res) {
   /**
    * TODO : finding the more carpets
    *  user can by with the max money that has
@@ -82,13 +83,12 @@ router.post('/bywithmoney', function (req, res) {
 });
 
 
-router.post('/mapsme' , function (req, res) {
-  /**
-   * TODO : finding nearest carpetStore and
-   *  routing the user to there Map.mapsme
-   * */
+router.get('/mapsme/:location' ,async function (req, res) {
+  let location = parseInt(req.params.location);
+  let router = await Map.mapsMe(location);
   res.json({
-    msg : "routing the user to the nearest Store"
+    msg : "routing the user to the nearest Store",
+    router : router
   });
 });
 
@@ -118,7 +118,5 @@ router.post('/deletefromcart/:id' , function (req, res) {
    *  of the user before payment
    * */
 });
-
-
 
 module.exports = router;
